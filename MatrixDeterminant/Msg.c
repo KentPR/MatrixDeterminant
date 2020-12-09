@@ -10,3 +10,8 @@ void filling_msg(void)
 	printf("Fill the matrix:\n");
 	printf("Row by row\n");
 }
+
+void answer_msg(int D)
+{
+	printf("Determinant = %d", D);
+}
