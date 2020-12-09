@@ -10,8 +10,7 @@ int input(void);
 int** memory_allocation(int N);
 int** filling_matrix(int** A, int N);
 int** Fill_new(int** A, int N, int column, int raw);
-int Finding_det(int** A, int N);
-void print(int** A, int N);
+long long int Finding_det(int** A, int N);
 
 int main()
 {
@@ -21,9 +20,9 @@ int main()
     int** Matrix = memory_allocation(N);
     filling_msg();
     Matrix = filling_matrix(Matrix, N);
-    print(Matrix, N);
+    print_for_calc(Matrix, N);
     _getch();
-    int D = Finding_det(Matrix, N);
+    long long int D = Finding_det(Matrix, N);
 
     answer_msg(D);
 
@@ -57,29 +56,6 @@ int** filling_matrix(int** A, int N)
         }
     }
     return A;
-}
-
-void print(int** A,int N)
-{
-    printf("det{");
-    for (int j = 0; j < N; j++)
-    {
-        printf("{");
-        for (int i = 0; i < N; i++)
-        {
-            printf("%d", A[j][i]);
-            if (i != N - 1) printf(",");
-        }
-        printf("}");
-        if (j != N - 1) 
-        { 
-            printf(" ");
-            printf(","); 
-        }
-        
-    }
-    printf("}");
-    //printf("\nEnd\n");
 }
 
 void freedom(int** A,int N)
@@ -128,7 +104,7 @@ int C(int j,int i,int N)
         return -1;
 }
 
-int Finding_det(int** A, int N)
+long long int Finding_det(int** A, int N)
 {
     if (N == 1)
     {
@@ -136,13 +112,13 @@ int Finding_det(int** A, int N)
         return A[0][0];
     }
 
-    int current_det = 0;
+    long long int current_det = 0;
     for (int i = 0; i < N; i++)
     {
         int** B = Fill_new(A, N, 0, i);
         //print(B, N - 1);
         int c = C(0, i, N);
-        int tmp = c * A[0][i] * Finding_det(B, N-1);
+        long long int tmp = (long long int)c * (long long int)A[0][i] * Finding_det(B, N-1);
         freedom(B, N-1);
         current_det += tmp;
     }
